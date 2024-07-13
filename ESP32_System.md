@@ -172,19 +172,25 @@ CPU  ทั้งสองตัวมืชื่อเรียกว่า PR
 ![alt text](./Images/image6.png)
 
 #### 3.2.2 Clock Source
-The ESP32 can use an external crystal oscillator, an internal PLL or an oscillating circuit as a clock source. Specifically, the clock sources available are:
-• High Speed Clocks
-– PLL_CLK is an internal PLL clock with a frequency of 320 MHz or 480 MHz.
-– XTL_CLK is a clock signal generated using an external crystal with a frequency range of 2 ~ 40 MHz.
-• Low Power Clocks
-– XTL32K_CLK is a clock generated using an external crystal with a frequency of 32 KHz.
-– RC_FAST_CLK is an internal clock with a default frequency of 8 MHz. This frequency is adjustable.
-– RC_FAST_DIV_CLK is divided from RC_FAST_CLK. Its frequency is (RC_FAST_CLK / 256). With the
-default RC_FAST_CLK frequency of 8 MHz, this clock runs at 31.250 KHz.
-– RC_SLOW_CLK is an internal low power clock with a default frequency of 150 KHz. This frequency is
-adjustable.
-• Audio Clock
-– APLL_CLK is an internal Audio PLL clock with a frequency range of 16 ~ 128 MHz.
+ESP32 สามารถรับสัญญาณนาฬิกาได้ทั้งจากภายนอกและภายในชิป โดยสามารถแบ่งออกเป็นสามกลุ่มคือสัญญาณนาฬิกาความเร็วสูง (High Speed Clocks) สัญญาณนาฬิกากำลังงานต่ำ (Low Power Clocks) และสัญญาณนาฬิกาสำหรับสัญญาณเสียง (Audio Clock)  
+
+##### สัญญาณนาฬิกาความเร็วสูง
+
+สัญญาณนาฬิกาความเร็วสูงเป็นสัญญาณนาฬิกาที่ถูกนำไปใช้กับ CPU ทั้งสองตัวในการทำงานด้วยความเร็วสูง ประกอบด้วย
+– PLL_CLK เป็นแหล่งกำเนิดสัญญาณนาฬิกาภายใน สามารถให้ความถี่ 320 MHz หรือ 480 MHz.
+– XTL_CLK เป็นแหล่งกำเนิดสัญญาณนาฬิกาจากภายนอก ด้วย crystal ที่มีย่านความถี่  2 ถึง 40 MHz.
+
+##### สัญญาณนาฬิกากำลังงานต่ำ
+
+สัญญาณนาฬิกากำลังงานต่ำถูกใช้เพื่อรักษานาฬิกาและปฏิทินของระบบ ประกอบด้วย
+– XTL32K_CLK เป็นสัญญาณนาฬิกาที่กำเนิดโดย crystal ความถี่ 32 KHz ที่เชื่อมต่อจากภายนอกชิป
+– RC_FAST_CLK เป็นตัวกำเนิดสัญญาณนาฬิกาภายในชิป กำเนิดโดยวงจร RC มีความถี่ในย่าน 8MHz และสามารถปรับแต่งได้โดย software
+– RC_FAST_DIV_CLK เป็นสัญญาณนาฬิกาที่ถูกหารจากสัญญาณ RC_FAST_CLK โดยมีความถี่เท่ากับ RC_FAST_CLK / 256 เมื่อความถี่เริ่มต้นของ RC_FAST_CLK frequency มีค่าเป็น 8 MHz จะได้ความถี่ของสัญญาณนี้เป็น 31.250 KHz
+– RC_SLOW_CLK เป็นสัญญาณนาฬิกาภายในชิป ความถี่เริ่มต้นมีค่าเท่ากับ 150 KHz แต่สามารถปรับแต่งได้โดย software
+
+##### สัญญาณนาฬิกาสำหรับสัญญาณเสียง
+
+– APLL_CLK เป็นสัญญาณนาฬิกาที่กำเนิดจากวงจรภายในชิป สามารถโปรแกรมให้อยู่ในช่วง 16 ถึง 128 MHz.
 
 #### 3.2.3 CPU Clock
 As Figure 3-2 shows, CPU_CLK is the master clock for both CPU cores. CPU_CLK clock can be as high as 240
@@ -193,7 +199,9 @@ power consumption.
 The CPU_CLK clock source is determined by the RTC_CNTL_SOC_CLK_SEL register. PLL_CLK, APLL_CLK,
 RC_FAST_CLK, and XTL_CLK can be set as the CPU_CLK source; see Table 3-2 and 3-3.
 
- 
+เมื่อต้องการประสิทธิภาพสูงเราสารมารถกำหนดค่า CPU_CLK ซึ่งเป็นนาฬิกาหลักสำหรับ CPU ทั้งสองตัวได้สูงถึง 240 MHz 
+
+หากต้องการลดการใช้พลังงานก็สามารถเลือกแหล่งกำเนิดที่ให้สัญญาณนาฬิกาแก่ CPU ที่ค่ำลง ซึ่งแหล่งสัญญาณนาฬิกา CPU_CLK ถูกกำหนดโดยการกำหนดค่าให้แก่รีจิสเตอร์ RTC_CNTL_SOC_CLK_SEL PLL_CLK, APLL_CLK, RC_FAST_CLK และ XTL_CLK  
 
 | RTC_CNTL_SOC_CLK_SEL Value Clock | Source |
 | - | -- |
@@ -213,6 +221,7 @@ RC_FAST_CLK, and XTL_CLK can be set as the CPU_CLK source; see Table 3-2 and 3-3
 | APLL_CLK | 3 | 1 | CPU_CLK = APLL_CLK / 2|
 
 #### Peripheral Clock
+สัญญาณนาฬิกาสำหรับอุปกรณ์ต่อพ่วง สามารถเลือกจากแหล่งต่าง ๆ ที่หลากหลาย อย่างไรก็ตาม เนื่องจากขข้อจำกัดทางด้าน hardware และโปรโตคอลต่าง ๆ จึงไม่สามารถกำหนดแหล่งกำเนิดบางแหล่งให้กับบางอุปกรณ์ เช่น เนื่องมาจากข้อกำหนดด้านความเร็วในการเชื่อมต่อและสื่อสารข้อมูลของอุปกรณ์นั้น ๆ กับโลกภายนอก CPU หากนำสัญญาณจากแหล้งที่ช้าหรือเร็วเกินไปอาจทำให้ไม่สามารถสื่อสารกันได้
 
 | Peripherals       | APB_CLK  | REF_TICK | LEDC_SCLK | APLL_CLK  |  PLL_F160M_CLK |
 |-----------|:---------:|:---------:|:---------:|:---------:|:---------:|
