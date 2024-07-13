@@ -7,7 +7,7 @@ CPU  ทั้งสองตัวมืชื่อเรียกว่า PR
 [reference](https://www.espressif.com/sites/default/files/documentation/esp32_technical_reference_manual_en.pdf#iomuxgpio)
 
 
-![alt text](./Images/image1.png)
+![alt text](./Images/image01.png)
 
 รูปที่ 1 โครงสร้างของระบบ
 
@@ -39,7 +39,7 @@ CPU  ทั้งสองตัวมืชื่อเรียกว่า PR
 – สามารถเชื่อมต่อกับหน่วยความจำภายนอกแบบ SPI ได้สูงสุด  16 MB 
 – สามารถเชื่อมต่อกับหน่วยความจำภายนอกแบบ SPI SRAM ได้ 8 MB
 
-![alt text](./Images/image2.png)
+![alt text](./Images/image02.png)
 
 รูปที่ 2 แผนผังการเข้าถึงหน่วยความจำ
 
@@ -106,7 +106,7 @@ CPU  ทั้งสองตัวมืชื่อเรียกว่า PR
 
 ### External Memory
 
-![alt text](./Images/image5.png)
+![alt text](./Images/image05.png)
 
 ### Peripherals
 
@@ -169,7 +169,7 @@ CPU  ทั้งสองตัวมืชื่อเรียกว่า PR
 
 ### System Clock
 
-![alt text](./Images/image6.png)
+![alt text](./Images/image06.png)
 
 #### 3.2.2 Clock Source
 ESP32 สามารถรับสัญญาณนาฬิกาได้ทั้งจากภายนอกและภายในชิป โดยสามารถแบ่งออกเป็นสามกลุ่มคือสัญญาณนาฬิกาความเร็วสูง (High Speed Clocks) สัญญาณนาฬิกากำลังงานต่ำ (Low Power Clocks) และสัญญาณนาฬิกาสำหรับสัญญาณเสียง (Audio Clock)  
