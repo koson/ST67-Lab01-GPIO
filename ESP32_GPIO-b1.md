@@ -38,19 +38,14 @@ gpio_set_direction(GPIO_NUM_0, GPIO_MODE_OUTPUT);
 gpio_set_level(GPIO_NUM_0, 1);
 ```
 
-
 ### 3.Read Input Pin
-เมื่อต้องการให้พอร์ตทำงานเป็นอินพุต ก็ต้องใช้ฟังก์ชันกำหนดทิศทางพอร์ต  `gpio_set_direction()` ด้วย แต่ต้องป้อนพารามิเตอร์ตัวที่สอง ให้มีทิศทางเป็น `GPIO_MODE_INPUT` เช่น  `gpio_set_direction(GPIO_NUM_1, GPIO_MODE_INPUT);`
+
+เมื่อต้องการให้พอร์ตทำงานเป็นอินพุต ก็ต้องใช้ฟังก์ชันกำหนดทิศทางพอร์ต  `gpio_set_direction()` ด้วย แต่ต้องป้อนพารามิเตอร์ตัวที่สอง ให้มีทิศทางเป็น `GPIO_MODE_INPUT` เป็น  `gpio_set_direction(GPIO_NUM_1, GPIO_MODE_INPUT);`
 
 การอ่านค่าระดับสัญญาณจากพอร์ต ใช้ฟังก์ชัน `gpio_get_level()` โดยต้องกำหนดพารามิเตอร์ของฟังก์ชันเป็นหมายเบขพอร์ตที่ต้องการอ่านค่า ซึ่งฟังก์ชันนี้ส่งค่ากลับมาเป็นระดับ high หรือ Low
 
-
-#### ตัวอย่างการอ่านระดับอินพุตของพอร์ต 
+#### ตัวอย่างการอ่านระดับอินพุตของพอร์ต
 
 ```c
 int gpio_get_level(GPIO_NUM_1);
 ```
-
-
-
-https://embeddedexplorer.com/esp32-gpio-tutorial/
